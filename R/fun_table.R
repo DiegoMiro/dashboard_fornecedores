@@ -243,6 +243,7 @@ fun_table <- function(tbl) {
           html = TRUE,
           width = 120,
           style = list(
+            borderLeft = "1px solid #cecfd3",
             background = if_else(str_detect(col, "TOTAL"), "#f9fafb", "white")
           ),
           cell = function(value, index) {
@@ -263,8 +264,6 @@ fun_table <- function(tbl) {
           html = TRUE,
           width = 120,
           style = list(
-            # borderLeft = "1px solid #E5E7EB"
-            borderLeft = "1px solid #cecfd3",
             background = if_else(str_detect(col, "TOTAL"), "#f9fafb", "white")
           ),
           cell = function(value, index) {
