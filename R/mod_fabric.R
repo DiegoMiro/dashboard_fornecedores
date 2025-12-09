@@ -25,6 +25,11 @@ mod_fabric_server <- function(id, dados_filtrados) {
       req(nrow(df) > 0)
       
       tbl_2 <- df %>%
+        distinct(season_id, season) %>%
+        arrange(season_id) %>%
+        mutate(season_factor = fct(season)) %>%
+        select(-season_id) %>%
+        left_join(df %>% select(-season_factor)) %>%
         select(
           season_factor,
           `FINAL FABRIC` = final_fabric,
