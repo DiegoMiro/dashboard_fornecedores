@@ -19,7 +19,7 @@ source("R/mod_visao_geral.R")
 source("R/mod_supplier.R")
 source("R/mod_fabric.R")
 
-# source("R/mod_geografia.R")
+source("R/mod_markup.R")
 
 options(
   highcharter.lang = list(
@@ -66,8 +66,8 @@ ui <- page_navbar(
 
   nav_panel("Visão geral",   mod_visao_geral_ui("visao_geral")),
   nav_panel("Supplier",      mod_supplier_ui("supplier")),
-  nav_panel("Fabric",        mod_fabric_ui("fabric"))
-  # nav_panel("Markup",        mod_markup_ui("markup")),
+  nav_panel("Fabric",        mod_fabric_ui("fabric")),
+  nav_panel("Markup",        mod_markup_ui("markup")),
 )
 
 #-------------------------------------------------------------------
@@ -83,7 +83,7 @@ server <- function(input, output, session) {
   mod_visao_geral_server("visao_geral",   dados_filtrados)
   mod_supplier_server("supplier",         dados_filtrados)
   mod_fabric_server("fabric",             dados_filtrados)
-  # mod_markup_server("markup",             dados_filtrados)
+  mod_markup_server("markup",             dados_filtrados)
 }
 
 shinyApp(ui, server)
