@@ -391,7 +391,10 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       df_agg <- df %>%
         # count(COO = coo, Supplier = final_supplier_production, sort = TRUE) %>%
         count(Supplier = final_supplier_production, sort = TRUE) %>%
-        mutate(p = n / sum(n))
+        mutate(
+          p = n / sum(n),
+          a = cumsum(p)
+        )
       
       df_agg %>%
         reactable(
@@ -405,17 +408,25 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           columns = list(
             n = colDef(
               name = "Cont.",
-              width = 80,
+              width = 60,
               format = colFormat(
                 digits = 0
               )
             ),
             p = colDef(
               name = "Perc.",
-              width = 80,
+              width = 60,
               format = colFormat(
                 percent = TRUE,
-                digits = 2
+                digits = 0
+              )
+            ),
+            a = colDef(
+              name = "Acum.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
               )
             )
           ),
@@ -432,12 +443,15 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       
       df_agg <- df %>%
         count(Category = category, sort = TRUE) %>%
-        mutate(p = n / sum(n))
+        mutate(
+          p = n / sum(n),
+          a = cumsum(p)
+        )
       
       df_agg %>%
         reactable(
           pagination = FALSE,
-          sortable = TRUE,
+          # sortable = TRUE,
           compact = TRUE,
           striped = TRUE,
           defaultColDef = colDef(
@@ -446,17 +460,25 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           columns = list(
             n = colDef(
               name = "Cont.",
-              width = 80,
+              width = 60,
               format = colFormat(
                 digits = 0
               )
             ),
             p = colDef(
               name = "Perc.",
-              width = 80,
+              width = 60,
               format = colFormat(
                 percent = TRUE,
-                digits = 2
+                digits = 0
+              )
+            ),
+            a = colDef(
+              name = "Acum.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
               )
             )
           ),
@@ -473,7 +495,10 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       
       df_agg <- df %>%
         count(Fabric = final_fabric, sort = TRUE) %>%
-        mutate(p = n / sum(n))
+        mutate(
+          p = n / sum(n),
+          a = cumsum(p)
+        )
       
       df_agg %>%
         reactable(
@@ -487,17 +512,25 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           columns = list(
             n = colDef(
               name = "Cont.",
-              width = 80,
+              width = 60,
               format = colFormat(
                 digits = 0
               )
             ),
             p = colDef(
               name = "Perc.",
-              width = 80,
+              width = 60,
               format = colFormat(
                 percent = TRUE,
-                digits = 2
+                digits = 0
+              )
+            ),
+            a = colDef(
+              name = "Acum.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
               )
             )
           ),

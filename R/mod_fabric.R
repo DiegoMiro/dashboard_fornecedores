@@ -41,14 +41,14 @@ mod_fabric_server <- function(id, dados_filtrados) {
           `FINAL FABRIC`
         ) %>%
         summarise(
-          VERBA = sum(`TOTAL VERBA $`),
-          SKU = n_distinct(`STYLE NUMBER`)
+          SKU = n_distinct(`STYLE NUMBER`),
+          VERBA = sum(`TOTAL VERBA $`)
         ) %>%
         ungroup() %>%
         pivot_wider(
           id_cols = `FINAL FABRIC`,
           names_from = SEASON,
-          values_from = c(VERBA, SKU),
+          values_from = c(SKU, VERBA),
           values_fill = 0
         ) %>%
         arrange(`FINAL FABRIC`)
