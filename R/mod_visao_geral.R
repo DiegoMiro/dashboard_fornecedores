@@ -399,7 +399,7 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       df_agg %>%
         reactable(
           pagination = FALSE,
-          sortable = TRUE,
+          sortable = FALSE,
           compact = TRUE,
           striped = TRUE,
           defaultColDef = colDef(
@@ -451,7 +451,7 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       df_agg %>%
         reactable(
           pagination = FALSE,
-          # sortable = TRUE,
+          sortable = FALSE,
           compact = TRUE,
           striped = TRUE,
           defaultColDef = colDef(
@@ -503,7 +503,7 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       df_agg %>%
         reactable(
           pagination = FALSE,
-          sortable = TRUE,
+          sortable = FALSE,
           compact = TRUE,
           striped = TRUE,
           defaultColDef = colDef(
