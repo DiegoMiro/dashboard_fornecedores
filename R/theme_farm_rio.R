@@ -48,6 +48,10 @@ farm_css <- function() {
     border-right: 0;
     box-shadow: 4px 0 18px rgba(0,0,0,0.06);
   }
+  
+  .bslib-sidebar-layout .sidebar .sidebar-content {
+    padding-top: 0px !important;
+  }
 
   .farm-sidebar h4 {
     font-weight: 700;
