@@ -115,13 +115,6 @@ mod_markup_server <- function(id, dados_filtrados) {
           minSize = "1%"
         ) |>
         hc_legend(enabled = FALSE) |>
-        # hc_plotOptions(
-        #   series = list(
-        #     label = list(
-        #       enabled = FALSE
-        #     )
-        #   )
-        # ) |>
         hc_tooltip(
           useHTML = TRUE,
           followPointer = TRUE,
@@ -155,7 +148,9 @@ mod_markup_server <- function(id, dados_filtrados) {
             title: { text: '' },
             credits: { enabled: false },
             xAxis: {
-              visible: false
+              visible: false,
+              minPadding: 0.05,
+              maxPadding: 0.05 
             },
             yAxis: {
               visible: false
