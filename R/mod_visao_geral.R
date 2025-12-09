@@ -130,6 +130,7 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
         mutate(season_factor = fct(season))
       
       df_agg <- df %>%
+        select(-season_factor) %>%
         left_join(df_season) %>%
         group_by(season_factor) %>%
         summarise(
@@ -195,6 +196,7 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
         mutate(season_factor = fct(season))
       
       df_agg <- df %>%
+        select(-season_factor) %>%
         left_join(df_season) %>%
         group_by(season_factor) %>%
         summarise(
@@ -254,6 +256,7 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       req(nrow(df) > 0)
       
       df_season <- df %>%
+        select(-season_factor) %>%
         arrange(season_id) %>%
         distinct(season) %>%
         mutate(season_factor = fct(season))
@@ -323,6 +326,7 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
         mutate(season_factor = fct(season))
       
       df_agg <- df %>%
+        select(-season_factor) %>%
         left_join(df_season) %>%
         group_by(season_factor) %>%
         summarise(
