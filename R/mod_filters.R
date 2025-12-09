@@ -18,6 +18,8 @@ mod_filters_ui <- function(id) {
       choices = NULL,
       multiple = TRUE,
       options = pickerOptions(
+        container = "body", 
+        selectedTextFormat = "count > 3",
         actionsBox = TRUE,
         liveSearch = TRUE,
         size = 8
@@ -29,6 +31,8 @@ mod_filters_ui <- function(id) {
       choices = NULL,
       multiple = TRUE,
       options = pickerOptions(
+        container = "body", 
+        selectedTextFormat = "count > 3",
         actionsBox = TRUE,
         liveSearch = TRUE,
         size = 8
@@ -40,6 +44,8 @@ mod_filters_ui <- function(id) {
       choices = NULL,
       multiple = TRUE,
       options = pickerOptions(
+        container = "body", 
+        selectedTextFormat = "count > 3",
         actionsBox = TRUE,
         liveSearch = TRUE,
         size = 8
@@ -51,6 +57,8 @@ mod_filters_ui <- function(id) {
       choices = NULL,
       multiple = TRUE,
       options = pickerOptions(
+        container = "body", 
+        selectedTextFormat = "count > 3",
         actionsBox = TRUE,
         liveSearch = TRUE,
         size = 8
@@ -62,6 +70,8 @@ mod_filters_ui <- function(id) {
       choices = NULL,
       multiple = TRUE,
       options = pickerOptions(
+        container = "body", 
+        selectedTextFormat = "count > 3",
         actionsBox = TRUE,
         liveSearch = TRUE,
         size = 8
@@ -73,6 +83,8 @@ mod_filters_ui <- function(id) {
       choices = NULL,
       multiple = TRUE,
       options = pickerOptions(
+        container = "body", 
+        selectedTextFormat = "count > 3",
         actionsBox = TRUE,
         liveSearch = TRUE,
         size = 8
