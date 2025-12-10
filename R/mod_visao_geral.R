@@ -40,7 +40,18 @@ mod_visao_geral_ui <- function(id) {
         title = "Tabela de Frequências",
         nav_panel(
           title = "Supplier",
-          reactableOutput(ns("rt_supplier"))
+          
+          layout_columns(
+            col_widths = c(6, 6),
+            card(
+              style = "border: 2px solid #28465e1a;",
+              reactableOutput(ns("rt_supplier"))
+            ),
+            card(
+              style = "border: 2px solid #28465e1a;",
+              reactableOutput(ns("rt_verba_supplier"))
+            )
+          )
         ),
         nav_panel(
           title = "Final Fabric",
@@ -58,7 +69,17 @@ mod_visao_geral_ui <- function(id) {
         ),
         nav_panel(
           title = "Category",
-          reactableOutput(ns("rt_category")),
+          layout_columns(
+            col_widths = c(6, 6),
+            card(
+              style = "border: 2px solid #28465e1a;",
+              reactableOutput(ns("rt_category"))
+            ),
+            card(
+              style = "border: 2px solid #28465e1a;",
+              reactableOutput(ns("rt_verba_category"))
+            )
+          )
         )
       )
     )
@@ -159,36 +180,47 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
         hc_xAxis(
           categories = df_agg$season_factor,
           labels = list(
-            useHTML = TRUE,
-            formatter = htmlwidgets::JS("
-        function () {
-          var label = this.value;
-
-          // separa tipo e ano
-          var tipo = label.replace(/[0-9]/g, '');
-          var ano  = parseInt(label.match(/[0-9]+/)[0]); // 24, 25, 26...
-
-          // converte para ano completo
-          var anoFull = 2000 + ano; // 2024, 2025, 2026
-
-          // verifica o label anterior
-          var prev = this.axis.categories[this.pos - 1];
-          var prevAno = prev ? 2000 + parseInt(prev.match(/[0-9]+/)[0]) : null;
-
-          // só mostra o ano quando ele muda
-          var showYear = (!prevAno || prevAno !== anoFull);
-
-          return '<div style=\"text-align:center;line-height:1.2\">' +
-                   '<div>' + tipo + '</div>' +
-                   (showYear
-                     ? '<div style=\"font-size:10px;color:#666\">' + anoFull + '</div>'
-                     : '<div>&nbsp;</div>') +
-                 '</div>';
-        }
-      ")
+            style = list(
+              fontSize = "8px"
+            ),
+            useHTML = TRUE#,
+      #       formatter = htmlwidgets::JS("
+      #   function () {
+      #     var label = this.value;
+      # 
+      #     // separa tipo e ano
+      #     var tipo = label.replace(/[0-9]/g, '');
+      #     var ano  = parseInt(label.match(/[0-9]+/)[0]); // 24, 25, 26...
+      # 
+      #     // converte para ano completo
+      #     var anoFull = 2000 + ano; // 2024, 2025, 2026
+      # 
+      #     // verifica o label anterior
+      #     var prev = this.axis.categories[this.pos - 1];
+      #     var prevAno = prev ? 2000 + parseInt(prev.match(/[0-9]+/)[0]) : null;
+      # 
+      #     // só mostra o ano quando ele muda
+      #     var showYear = (!prevAno || prevAno !== anoFull);
+      # 
+      #     return '<div style=\"text-align:center;line-height:1.2\">' +
+      #              '<div>' + tipo + '</div>' +
+      #              (showYear
+      #                ? '<div style=\"font-size:10px;color:#666\">' + anoFull + '</div>'
+      #                : '<div>&nbsp;</div>') +
+      #            '</div>';
+      #   }
+      # ")
           )
           ) %>%
-        hc_yAxis(title = list(text = NA), min = 0) %>%
+        hc_yAxis(
+          title = list(text = NA),
+          labels = list(
+            style = list(
+              fontSize = "8px"
+            )
+          ),
+          min = 0
+        ) %>%
         hc_title(
           text = "SKUs",
           align = "left",
@@ -253,8 +285,23 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       
       highchart() %>%
         hc_chart(type = "line") %>%
-        hc_xAxis(categories = df_agg$season_factor) %>%
-        hc_yAxis(title = list(text = NA), min = 0) %>%
+        hc_xAxis(
+          categories = df_agg$season_factor,
+          labels = list(
+            style = list(
+              fontSize = "8px"
+            )
+          )
+        ) %>%
+        hc_yAxis(
+          title = list(text = NA),
+          labels = list(
+            style = list(
+              fontSize = "8px"
+            )
+          ),
+          min = 0
+        ) %>%
         hc_title(
           text = "Verba",
           align = "left",
@@ -318,8 +365,23 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       
       highchart() %>%
         hc_chart(type = "line") %>%
-        hc_xAxis(categories = df_agg$season_factor) %>%
-        hc_yAxis(title = list(text = NA), min = 0) %>%
+        hc_xAxis(
+          categories = df_agg$season_factor,
+          labels = list(
+            style = list(
+              fontSize = "8px"
+            )
+          )
+        ) %>%
+        hc_yAxis(
+          title = list(text = NA),
+          labels = list(
+            style = list(
+              fontSize = "8px"
+            )
+          ),
+          min = 0
+        ) %>%
         hc_title(
           text = "Custo",
           align = "left",
@@ -386,8 +448,22 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       
       highchart() %>%
         hc_chart(type = "line") %>%
-        hc_xAxis(categories = df_agg$season_factor) %>%
-        hc_yAxis(title = list(text = NA)) %>%
+        hc_xAxis(
+          categories = df_agg$season_factor,
+          labels = list(
+            style = list(
+              fontSize = "8px"
+            )
+          )
+        ) %>%
+        hc_yAxis(
+          title = list(text = NA),
+          labels = list(
+            style = list(
+              fontSize = "8px"
+            )
+          )
+        ) %>%
         hc_title(
           text = "Markup",
           align = "left",
@@ -449,7 +525,7 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           ),
           columns = list(
             n = colDef(
-              name = "Cont.",
+              name = "SKUs",
               width = 60,
               format = colFormat(
                 digits = 0
@@ -479,6 +555,72 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       
     })
     
+    output$rt_verba_supplier <- renderReactable({
+      df <- dados_filtrados()
+      req(nrow(df) > 0)
+      
+      df_agg <- df %>%
+        group_by(Supplier = final_supplier_production) %>%
+        summarise(verba = sum(total_verba)) %>%
+        ungroup() %>%
+        arrange(desc(verba)) %>%
+        mutate(
+          p = verba / sum(verba),
+          a = cumsum(p)
+        ) %>%
+        rowid_to_column(var ="r")
+      
+      df_agg %>%
+        reactable(
+          pagination = FALSE,
+          sortable = FALSE,
+          compact = TRUE,
+          striped = TRUE,
+          defaultColDef = colDef(
+            headerStyle = list(fontWeight = "bold")
+          ),
+          columns = list(
+            r = colDef(
+              name = "Rank",
+              width = 60,
+              format = colFormat(
+                digits = 0
+              )
+            ),
+            verba = colDef(
+              name = "Verba",
+              width = 120,
+              format = colFormat(
+                digits = 0,
+                separators = TRUE
+              )
+            ),
+            p = colDef(
+              name = "Perc.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            ),
+            a = colDef(
+              name = "Acum.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            )
+          ),
+          theme = reactableTheme(
+            backgroundColor = "#FFF9F0"
+          )
+        )
+      
+    })
+    
+    
+    
     output$rt_category <- renderReactable({
       df <- dados_filtrados()
       req(nrow(df) > 0)
@@ -501,10 +643,74 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           ),
           columns = list(
             n = colDef(
-              name = "Cont.",
+              name = "SKUs",
               width = 60,
               format = colFormat(
                 digits = 0
+              )
+            ),
+            p = colDef(
+              name = "Perc.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            ),
+            a = colDef(
+              name = "Acum.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            )
+          ),
+          theme = reactableTheme(
+            backgroundColor = "#FFF9F0"
+          )
+        )
+      
+    })
+    
+    output$rt_verba_category <- renderReactable({
+      df <- dados_filtrados()
+      req(nrow(df) > 0)
+      
+      df_agg <- df %>%
+        group_by(Category = category) %>%
+        summarise(verba = sum(total_verba)) %>%
+        ungroup() %>%
+        arrange(desc(verba)) %>%
+        mutate(
+          p = verba / sum(verba),
+          a = cumsum(p)
+        ) %>%
+        rowid_to_column(var ="r")
+      
+      df_agg %>%
+        reactable(
+          pagination = FALSE,
+          sortable = FALSE,
+          compact = TRUE,
+          striped = TRUE,
+          defaultColDef = colDef(
+            headerStyle = list(fontWeight = "bold")
+          ),
+          columns = list(
+            r = colDef(
+              name = "Rank",
+              width = 60,
+              format = colFormat(
+                digits = 0
+              )
+            ),
+            verba = colDef(
+              name = "Verba",
+              width = 120,
+              format = colFormat(
+                digits = 0,
+                separators = TRUE
               )
             ),
             p = colDef(
