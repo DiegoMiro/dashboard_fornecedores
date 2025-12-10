@@ -80,6 +80,34 @@ mod_visao_geral_ui <- function(id) {
               reactableOutput(ns("rt_verba_category"))
             )
           )
+        ),
+        nav_panel(
+          title = "Fabric Type",
+          layout_columns(
+            col_widths = c(6, 6),
+            card(
+              style = "border: 2px solid #28465e1a;",
+              reactableOutput(ns("rt_fabric_type"))
+            ),
+            card(
+              style = "border: 2px solid #28465e1a;",
+              reactableOutput(ns("rt_verba_fabric_type"))
+            )
+          )
+        ),
+        nav_panel(
+          title = "Squad",
+          layout_columns(
+            col_widths = c(6, 6),
+            card(
+              style = "border: 2px solid #28465e1a;",
+              reactableOutput(ns("rt_squad"))
+            ),
+            card(
+              style = "border: 2px solid #28465e1a;",
+              reactableOutput(ns("rt_verba_squad"))
+            )
+          )
         )
       )
     )
@@ -806,6 +834,260 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       
       df_agg <- df %>%
         group_by(Fabric = final_fabric) %>%
+        summarise(verba = sum(total_verba)) %>%
+        ungroup() %>%
+        arrange(desc(verba)) %>%
+        mutate(
+          p = verba / sum(verba),
+          a = cumsum(p)
+        ) %>%
+        rowid_to_column(var ="r")
+      
+      df_agg %>%
+        reactable(
+          pagination = FALSE,
+          sortable = FALSE,
+          compact = TRUE,
+          striped = TRUE,
+          defaultColDef = colDef(
+            headerStyle = list(fontWeight = "bold")
+          ),
+          columns = list(
+            r = colDef(
+              name = "Rank",
+              width = 60,
+              format = colFormat(
+                digits = 0
+              )
+            ),
+            verba = colDef(
+              name = "Verba",
+              width = 120,
+              format = colFormat(
+                digits = 0,
+                separators = TRUE
+              )
+            ),
+            p = colDef(
+              name = "Perc.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            ),
+            a = colDef(
+              name = "Acum.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            )
+          ),
+          theme = reactableTheme(
+            backgroundColor = "#FFF9F0"
+          )
+        )
+      
+    })
+    
+    
+    
+    output$rt_fabric_type <- renderReactable({
+      df <- dados_filtrados()
+      req(nrow(df) > 0)
+      
+      df_agg <- df %>%
+        count(`Fabric Type` = fabric_type, sort = TRUE) %>%
+        mutate(
+          p = n / sum(n),
+          a = cumsum(p)
+        ) %>%
+        rowid_to_column(var ="r")
+      
+      df_agg %>%
+        reactable(
+          pagination = FALSE,
+          sortable = FALSE,
+          compact = TRUE,
+          striped = TRUE,
+          defaultColDef = colDef(
+            headerStyle = list(fontWeight = "bold")
+          ),
+          columns = list(
+            r = colDef(
+              name = "Rank",
+              width = 60,
+              format = colFormat(
+                digits = 0
+              )
+            ),
+            n = colDef(
+              name = "SKUs",
+              width = 120,
+              format = colFormat(
+                digits = 0,
+                separators = TRUE
+              )
+            ),
+            p = colDef(
+              name = "Perc.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            ),
+            a = colDef(
+              name = "Acum.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            )
+          ),
+          theme = reactableTheme(
+            backgroundColor = "#FFF9F0"
+          )
+        )
+      
+    })
+    
+    output$rt_verba_fabric_type <- renderReactable({
+      df <- dados_filtrados()
+      req(nrow(df) > 0)
+      
+      df_agg <- df %>%
+        group_by(`Fabric Type` = fabric_type) %>%
+        summarise(verba = sum(total_verba)) %>%
+        ungroup() %>%
+        arrange(desc(verba)) %>%
+        mutate(
+          p = verba / sum(verba),
+          a = cumsum(p)
+        ) %>%
+        rowid_to_column(var ="r")
+      
+      df_agg %>%
+        reactable(
+          pagination = FALSE,
+          sortable = FALSE,
+          compact = TRUE,
+          striped = TRUE,
+          defaultColDef = colDef(
+            headerStyle = list(fontWeight = "bold")
+          ),
+          columns = list(
+            r = colDef(
+              name = "Rank",
+              width = 60,
+              format = colFormat(
+                digits = 0
+              )
+            ),
+            verba = colDef(
+              name = "Verba",
+              width = 120,
+              format = colFormat(
+                digits = 0,
+                separators = TRUE
+              )
+            ),
+            p = colDef(
+              name = "Perc.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            ),
+            a = colDef(
+              name = "Acum.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            )
+          ),
+          theme = reactableTheme(
+            backgroundColor = "#FFF9F0"
+          )
+        )
+      
+    })
+    
+    
+    
+    output$rt_squad <- renderReactable({
+      df <- dados_filtrados()
+      req(nrow(df) > 0)
+      
+      df_agg <- df %>%
+        count(Squad = squad, sort = TRUE) %>%
+        mutate(
+          p = n / sum(n),
+          a = cumsum(p)
+        ) %>%
+        rowid_to_column(var ="r")
+      
+      df_agg %>%
+        reactable(
+          pagination = FALSE,
+          sortable = FALSE,
+          compact = TRUE,
+          striped = TRUE,
+          defaultColDef = colDef(
+            headerStyle = list(fontWeight = "bold")
+          ),
+          columns = list(
+            r = colDef(
+              name = "Rank",
+              width = 60,
+              format = colFormat(
+                digits = 0
+              )
+            ),
+            n = colDef(
+              name = "SKUs",
+              width = 120,
+              format = colFormat(
+                digits = 0,
+                separators = TRUE
+              )
+            ),
+            p = colDef(
+              name = "Perc.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            ),
+            a = colDef(
+              name = "Acum.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            )
+          ),
+          theme = reactableTheme(
+            backgroundColor = "#FFF9F0"
+          )
+        )
+      
+    })
+    
+    output$rt_verba_squad <- renderReactable({
+      df <- dados_filtrados()
+      req(nrow(df) > 0)
+      
+      df_agg <- df %>%
+        group_by(Squad = squad) %>%
         summarise(verba = sum(total_verba)) %>%
         ungroup() %>%
         arrange(desc(verba)) %>%
