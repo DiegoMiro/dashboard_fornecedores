@@ -238,7 +238,7 @@ fun_table <- function(tbl) {
       lapply(sku_cols, function(col) {
         total_col <- totals[[col]]
         colDef(
-          name = "SKU",
+          name = "SKUs",
           align = "right",
           html = TRUE,
           width = 120,

@@ -4,11 +4,12 @@ farm_theme <- function() {
     version = 5,
     base_font    = font_google("Nunito"),
     heading_font = font_google("Playfair Display"),
-    primary   = "#9A0405",
+    # primary   = "#9A0405",
+    primary   = "#8B2C1F",
     secondary = "#FEC85D",
     success   = "#1EAD74",
     info      = "#00A0C6",
-    bg        = "#FFF9F0",
+      bg        = "#FFF9F0",
     # bg        = "white",
     fg        = "#351E1C"
   )
@@ -17,7 +18,7 @@ farm_theme <- function() {
 farm_css <- function() {
   tags$style(HTML("
   :root {
-    --farm-primary: #9A0405;
+    --farm-primary: #8B2C1F;
     --farm-secondary: #FEC85D;
     --farm-green: #1EAD74;
     --farm-blue: #00A0C6;

@@ -4,52 +4,65 @@ mod_visao_geral_ui <- function(id) {
   
   tagList(
     layout_columns(
-      col_widths = c(3, 3, 3, 3, 4, 4, 4),
-      row_heights = c(1, 2),
+      col_widths = c(3, 3, 3, 3, 12),
+      row_heights = c(2, 3),
       card(
+        style = "border: 1px solid #1F5FBF;",
         card_body(
           highchartOutput(ns("hc_sku_season"))
         ),
         full_screen = TRUE
       ),
       card(
+        style = "border: 1px solid #1EAD74;",
         card_body(
           highchartOutput(ns("hc_verba_seson"))
         ),
         full_screen = TRUE
       ),
       card(
+        style = "border: 1px solid #C1121F;",
         card_body(
           highchartOutput(ns("hc_custo_season"))
         ),
         full_screen = TRUE
       ),
       card(
+        style = "border: 1px solid #F18F01;",
         card_body(
           highchartOutput(ns("hc_markup_season"))
         ),
         full_screen = TRUE
       ),
       
-      card(
-        card_body(
+      # Abas dentro do card
+      navset_card_pill(
+        title = "Tabela de Frequências",
+        nav_panel(
+          title = "Supplier",
           reactableOutput(ns("rt_supplier"))
         ),
-        full_screen = TRUE
-      ),
-      card(
-        card_body(
-          reactableOutput(ns("rt_final_fabric"))
+        nav_panel(
+          title = "Final Fabric",
+          layout_columns(
+            col_widths = c(6, 6),
+            card(
+              # style = "border: 1px solid #1F5FBF;",
+              style = "border: 2px solid #28465e1a;",
+              reactableOutput(ns("rt_final_fabric"))
+            ),
+            card(
+              # style = "border: 1px solid #1EAD74;",
+              style = "border: 2px solid #28465e1a;",
+              reactableOutput(ns("rt_verba_final_fabric"))
+            )
+          )
         ),
-        full_screen = TRUE
-      ),
-      card(
-        card_body(
-          reactableOutput(ns("rt_category"))
-        ),
-        full_screen = TRUE
+        nav_panel(
+          title = "Category",
+          reactableOutput(ns("rt_category")),
+        )
       )
-      
     )
   )
 }
@@ -291,7 +304,7 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           text = agg_total,
           align = "left",
           style = list(
-            color = "#9A0405",
+            color = "#C1121F",
             fontSize = "24px",
             fontWeight = "bold"
           )
@@ -299,7 +312,7 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
         hc_add_series(
           name  = "Custo",
           data  = round(df_agg$total_custo, 2),
-          color = "#9A0405"
+          color = "#C1121F"
         ) %>%
         hc_legend(enabled = FALSE) %>%
         hc_tooltip(
@@ -489,6 +502,8 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       
     })
     
+    
+    
     output$rt_final_fabric <- renderReactable({
       df <- dados_filtrados()
       req(nrow(df) > 0)
@@ -498,7 +513,8 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
         mutate(
           p = n / sum(n),
           a = cumsum(p)
-        )
+        ) %>%
+        rowid_to_column(var ="r")
       
       df_agg %>%
         reactable(
@@ -510,11 +526,83 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
             headerStyle = list(fontWeight = "bold")
           ),
           columns = list(
-            n = colDef(
-              name = "Cont.",
+            r = colDef(
+              name = "Rank",
               width = 60,
               format = colFormat(
                 digits = 0
+              )
+            ),
+            n = colDef(
+              name = "SKUs",
+              width = 120,
+              format = colFormat(
+                digits = 0,
+                separators = TRUE
+              )
+            ),
+            p = colDef(
+              name = "Perc.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            ),
+            a = colDef(
+              name = "Acum.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            )
+          ),
+          theme = reactableTheme(
+            backgroundColor = "#FFF9F0"
+          )
+        )
+      
+    })
+    
+    output$rt_verba_final_fabric <- renderReactable({
+      df <- dados_filtrados()
+      req(nrow(df) > 0)
+      
+      df_agg <- df %>%
+        group_by(Fabric = final_fabric) %>%
+        summarise(verba = sum(total_verba)) %>%
+        ungroup() %>%
+        arrange(desc(verba)) %>%
+        mutate(
+          p = verba / sum(verba),
+          a = cumsum(p)
+        ) %>%
+        rowid_to_column(var ="r")
+      
+      df_agg %>%
+        reactable(
+          pagination = FALSE,
+          sortable = FALSE,
+          compact = TRUE,
+          striped = TRUE,
+          defaultColDef = colDef(
+            headerStyle = list(fontWeight = "bold")
+          ),
+          columns = list(
+            r = colDef(
+              name = "Rank",
+              width = 60,
+              format = colFormat(
+                digits = 0
+              )
+            ),
+            verba = colDef(
+              name = "Verba",
+              width = 120,
+              format = colFormat(
+                digits = 0,
+                separators = TRUE
               )
             ),
             p = colDef(
