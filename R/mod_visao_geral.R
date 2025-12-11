@@ -191,12 +191,12 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       
       df_agg <- df %>%
         select(-season_factor) %>%
-        left_join(df_season) %>%
+        left_join(df_season, "season") %>%
         group_by(season_factor) %>%
         summarise(
           total_sku = n_distinct(style_number),
-          .groups = "drop"
         ) %>%
+        ungroup() %>%
         arrange(season_factor)
       
       agg_total <- df_agg$total_sku %>%
@@ -299,12 +299,12 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       
       df_agg <- df %>%
         select(-season_factor) %>%
-        left_join(df_season) %>%
+        left_join(df_season, "season") %>%
         group_by(season_factor) %>%
         summarise(
-          total_verba = sum(total_verba, na.rm = TRUE),
-          .groups = "drop"
+          total_verba = sum(total_verba, na.rm = TRUE)
         ) %>%
+        ungroup() %>%
         arrange(season_factor)
       
       agg_total <- df_agg$total_verba %>%
@@ -373,18 +373,18 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       req(nrow(df) > 0)
       
       df_season <- df %>%
-        select(-season_factor) %>%
         arrange(season_id) %>%
         distinct(season) %>%
         mutate(season_factor = fct(season))
       
       df_agg <- df %>%
-        left_join(df_season) %>%
+        select(-season_factor) %>%
+        left_join(df_season, "season") %>%
         group_by(season_factor) %>%
         summarise(
-          total_custo = sum(total_custo, na.rm = TRUE),
-          .groups = "drop"
+          total_custo = sum(total_custo, na.rm = TRUE)
         ) %>%
+        ungroup() %>%
         arrange(season_factor)
       
       agg_total <- df_agg$total_custo %>%
@@ -459,13 +459,13 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       
       df_agg <- df %>%
         select(-season_factor) %>%
-        left_join(df_season) %>%
+        left_join(df_season, "season") %>%
         group_by(season_factor) %>%
         summarise(
           total_verba = sum(total_verba, na.rm = TRUE),
-          total_custo = sum(total_custo, na.rm = TRUE),
-          .groups = "drop"
+          total_custo = sum(total_custo, na.rm = TRUE)
         ) %>%
+        ungroup() %>%
         mutate(
           markup = ifelse(total_custo > 0, total_verba / total_custo, NA_real_),
         ) %>%
@@ -772,7 +772,7 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       req(nrow(df) > 0)
       
       df_agg <- df %>%
-        count(Fabric = final_fabric, sort = TRUE) %>%
+        count(`Final Fabric` = final_fabric, sort = TRUE) %>%
         mutate(
           p = n / sum(n),
           a = cumsum(p)
@@ -833,7 +833,7 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
       req(nrow(df) > 0)
       
       df_agg <- df %>%
-        group_by(Fabric = final_fabric) %>%
+        group_by(`Final Fabric` = final_fabric) %>%
         summarise(verba = sum(total_verba)) %>%
         ungroup() %>%
         arrange(desc(verba)) %>%

@@ -12,6 +12,12 @@ mod_filters_ui <- function(id) {
     #     "Filtros em tempo real"
     #   )
     # ),
+    actionButton(
+      ns("reset"),
+      label = "Limpar filtros",
+      icon = icon("broom"),
+      class = "btn-sm btn-outline-primary"
+    ),
     pickerInput(
       inputId = ns("season"),
       label   = "Season",
@@ -52,8 +58,34 @@ mod_filters_ui <- function(id) {
       )
     ),
     pickerInput(
+      inputId = ns("final_fabric"),
+      label   = "Final Fabric",
+      choices = NULL,
+      multiple = TRUE,
+      options = pickerOptions(
+        container = "body", 
+        selectedTextFormat = "count > 3",
+        actionsBox = TRUE,
+        liveSearch = TRUE,
+        size = 8
+      )
+    ),
+    pickerInput(
       inputId = ns("category"),
       label   = "Category",
+      choices = NULL,
+      multiple = TRUE,
+      options = pickerOptions(
+        container = "body", 
+        selectedTextFormat = "count > 3",
+        actionsBox = TRUE,
+        liveSearch = TRUE,
+        size = 8
+      )
+    ),
+    pickerInput(
+      inputId = ns("fabric_type"),
+      label   = "Fabric Type",
       choices = NULL,
       multiple = TRUE,
       options = pickerOptions(
@@ -76,26 +108,6 @@ mod_filters_ui <- function(id) {
         liveSearch = TRUE,
         size = 8
       )
-    ),
-    pickerInput(
-      inputId = ns("on_floor_month"),
-      label   = "On Floor Month",
-      choices = NULL,
-      multiple = TRUE,
-      options = pickerOptions(
-        container = "body", 
-        selectedTextFormat = "count > 3",
-        actionsBox = TRUE,
-        liveSearch = TRUE,
-        size = 8
-      )
-    ),
-    hr(),
-    actionButton(
-      ns("reset"),
-      label = "Limpar filtros",
-      icon = icon("broom"),
-      class = "btn-sm btn-outline-primary"
     )
   )
 }
@@ -121,18 +133,23 @@ mod_filters_server <- function(id, data) {
         selected = character(0)
       )
       updatePickerInput(
+        session, "final_fabric",
+        choices = sort(unique(data$final_fabric)),
+        selected = character(0)
+      )
+      updatePickerInput(
         session, "category",
         choices = sort(unique(data$category)),
         selected = character(0)
       )
       updatePickerInput(
-        session, "squad",
-        choices = sort(unique(data$squad)),
+        session, "fabric_type",
+        choices = sort(unique(data$fabric_type)),
         selected = character(0)
       )
       updatePickerInput(
-        session, "on_floor_month",
-        choices = sort(unique(data$on_floor_month)),
+        session, "squad",
+        choices = sort(unique(data$squad)),
         selected = character(0)
       )
     })
@@ -150,14 +167,17 @@ mod_filters_server <- function(id, data) {
       if (!is.null(input$supplier) && length(input$supplier) > 0) {
         df <- df %>% dplyr::filter(final_supplier_production %in% input$supplier)
       }
+      if (!is.null(input$final_fabric) && length(input$final_fabric) > 0) {
+        df <- df %>% dplyr::filter(final_fabric %in% input$final_fabric)
+      }
       if (!is.null(input$category) && length(input$category) > 0) {
         df <- df %>% dplyr::filter(category %in% input$category)
       }
+      if (!is.null(input$fabric_type) && length(input$fabric_type) > 0) {
+        df <- df %>% dplyr::filter(fabric_type %in% input$fabric_type)
+      }
       if (!is.null(input$squad) && length(input$squad) > 0) {
         df <- df %>% dplyr::filter(squad %in% input$squad)
-      }
-      if (!is.null(input$on_floor_month) && length(input$on_floor_month) > 0) {
-        df <- df %>% dplyr::filter(on_floor_month %in% input$on_floor_month)
       }
 
       df
@@ -192,28 +212,25 @@ mod_filters_server <- function(id, data) {
     #     choices  = sort(unique(df$squad)),
     #     selected = intersect(input$squad, unique(df$squad))
     #   )
-    #   updatePickerInput(
-    #     session, "on_floor_month",
-    #     choices  = sort(unique(df$on_floor_month)),
-    #     selected = intersect(input$on_floor_month, unique(df$on_floor_month))
-    #   )
     # }, ignoreInit = TRUE)
 
     # Reset
     observeEvent(input$reset, {
-      updatePickerInput(session, "season", selected = character(0))
-      updatePickerInput(session, "coo", selected = character(0))
-      updatePickerInput(session, "supplier", selected = character(0))
-      updatePickerInput(session, "category", selected = character(0))
-      updatePickerInput(session, "squad", selected = character(0))
-      updatePickerInput(session, "on_floor_month", selected = character(0))
+      updatePickerInput(session, "season",       selected = character(0))
+      updatePickerInput(session, "coo",          selected = character(0))
+      updatePickerInput(session, "supplier",     selected = character(0))
+      updatePickerInput(session, "final_fabric", selected = character(0))
+      updatePickerInput(session, "category",     selected = character(0))
+      updatePickerInput(session, "fabric_type",  selected = character(0))
+      updatePickerInput(session, "squad",        selected = character(0))
 
-      updatePickerInput(session, "season",   choices = sort(unique(data$season)))
-      updatePickerInput(session, "coo",      choices = sort(unique(data$coo)))
-      updatePickerInput(session, "supplier", choices = sort(unique(data$final_supplier_production)))
-      updatePickerInput(session, "category", choices = sort(unique(data$category)))
-      updatePickerInput(session, "squad",    choices = sort(unique(data$squad)))
-      updatePickerInput(session, "on_floor_month", choices = sort(unique(data$on_floor_month)))
+      updatePickerInput(session, "season",       choices = sort(unique(data$season)))
+      updatePickerInput(session, "coo",          choices = sort(unique(data$coo)))
+      updatePickerInput(session, "supplier",     choices = sort(unique(data$final_supplier_production)))
+      updatePickerInput(session, "final_fabric", choices = sort(unique(data$final_fabric)))
+      updatePickerInput(session, "category",     choices = sort(unique(data$category)))
+      updatePickerInput(session, "fabric_type",  choices = sort(unique(data$fabric_type)))
+      updatePickerInput(session, "squad",        choices = sort(unique(data$squad)))
     })
 
     return(dados_filtrados)
