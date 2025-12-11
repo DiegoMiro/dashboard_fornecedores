@@ -119,7 +119,7 @@ mod_filters_server <- function(id, data) {
     observe({
       updatePickerInput(
         session, "season",
-        choices = sort(unique(data$season)),
+        choices = unique(data$season),
         selected = character(0)
       )
       updatePickerInput(

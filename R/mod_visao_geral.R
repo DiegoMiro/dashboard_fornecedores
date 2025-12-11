@@ -39,6 +39,21 @@ mod_visao_geral_ui <- function(id) {
       navset_card_pill(
         title = "Tabela de Frequências",
         nav_panel(
+          title = "COO",
+          
+          layout_columns(
+            col_widths = c(6, 6),
+            card(
+              style = "border: 2px solid #28465e1a;",
+              reactableOutput(ns("rt_coo"))
+            ),
+            card(
+              style = "border: 2px solid #28465e1a;",
+              reactableOutput(ns("rt_verba_coo"))
+            )
+          )
+        ),
+        nav_panel(
           title = "Supplier",
           
           layout_columns(
@@ -530,17 +545,19 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
         )
     })
     
-    output$rt_supplier <- renderReactable({
+    
+    output$rt_coo <- renderReactable({
       df <- dados_filtrados()
       req(nrow(df) > 0)
       
       df_agg <- df %>%
         # count(COO = coo, Supplier = final_supplier_production, sort = TRUE) %>%
-        count(Supplier = final_supplier_production, sort = TRUE) %>%
+        count(COO = coo, sort = TRUE) %>%
         mutate(
           p = n / sum(n),
           a = cumsum(p)
-        )
+        ) %>%
+        rowid_to_column(var ="r")
       
       df_agg %>%
         reactable(
@@ -552,6 +569,140 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
             headerStyle = list(fontWeight = "bold")
           ),
           columns = list(
+            r = colDef(
+              name = "Rank",
+              width = 60,
+              format = colFormat(
+                digits = 0
+              )
+            ),
+            n = colDef(
+              name = "SKUs",
+              width = 60,
+              format = colFormat(
+                digits = 0
+              )
+            ),
+            p = colDef(
+              name = "Perc.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            ),
+            a = colDef(
+              name = "Acum.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            )
+          ),
+          theme = reactableTheme(
+            backgroundColor = "#FFF9F0"
+          )
+        )
+      
+    })
+    
+    output$rt_verba_coo <- renderReactable({
+      df <- dados_filtrados()
+      req(nrow(df) > 0)
+      
+      df_agg <- df %>%
+        group_by(COO = coo) %>%
+        summarise(verba = sum(total_verba)) %>%
+        ungroup() %>%
+        arrange(desc(verba)) %>%
+        mutate(
+          p = verba / sum(verba),
+          a = cumsum(p)
+        ) %>%
+        rowid_to_column(var ="r")
+      
+      df_agg %>%
+        reactable(
+          pagination = FALSE,
+          sortable = FALSE,
+          compact = TRUE,
+          striped = TRUE,
+          defaultColDef = colDef(
+            headerStyle = list(fontWeight = "bold")
+          ),
+          columns = list(
+            r = colDef(
+              name = "Rank",
+              width = 60,
+              format = colFormat(
+                digits = 0
+              )
+            ),
+            verba = colDef(
+              name = "Verba",
+              width = 120,
+              format = colFormat(
+                digits = 0,
+                separators = TRUE
+              )
+            ),
+            p = colDef(
+              name = "Perc.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            ),
+            a = colDef(
+              name = "Acum.",
+              width = 60,
+              format = colFormat(
+                percent = TRUE,
+                digits = 0
+              )
+            )
+          ),
+          theme = reactableTheme(
+            backgroundColor = "#FFF9F0"
+          )
+        )
+      
+    })
+    
+    
+    
+    output$rt_supplier <- renderReactable({
+      df <- dados_filtrados()
+      req(nrow(df) > 0)
+      
+      df_agg <- df %>%
+        # count(COO = coo, Supplier = final_supplier_production, sort = TRUE) %>%
+        count(Supplier = final_supplier_production, sort = TRUE) %>%
+        mutate(
+          p = n / sum(n),
+          a = cumsum(p)
+        ) %>%
+        rowid_to_column(var ="r")
+      
+      df_agg %>%
+        reactable(
+          pagination = FALSE,
+          sortable = FALSE,
+          compact = TRUE,
+          striped = TRUE,
+          defaultColDef = colDef(
+            headerStyle = list(fontWeight = "bold")
+          ),
+          columns = list(
+            r = colDef(
+              name = "Rank",
+              width = 60,
+              format = colFormat(
+                digits = 0
+              )
+            ),
             n = colDef(
               name = "SKUs",
               width = 60,
@@ -658,7 +809,8 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
         mutate(
           p = n / sum(n),
           a = cumsum(p)
-        )
+        ) %>%
+        rowid_to_column(var ="r")
       
       df_agg %>%
         reactable(
@@ -670,6 +822,13 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
             headerStyle = list(fontWeight = "bold")
           ),
           columns = list(
+            r = colDef(
+              name = "Rank",
+              width = 60,
+              format = colFormat(
+                digits = 0
+              )
+            ),
             n = colDef(
               name = "SKUs",
               width = 60,

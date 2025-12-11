@@ -129,7 +129,7 @@ mod_markup_server <- function(id, dados_filtrados) {
         var html = '<b>' + point.name + '</b><br/>' +
                    'Total verba: ' + Highcharts.numberFormat(point.z, 0, ',', '.') + '<br/>' +
                    'Styles: ' + point.styles + '<br/>' +
-                   'Seasons: ' + point.seasons + '<hr/>' +
+                   'Seasons: ' + point.seasons + '<br/>' + '<br/>' +
                    '<div style=\"color:#F18F01;font-weight: bold;\">Markup médio: ' + Highcharts.numberFormat(point.x, 2, ',', '.') + '</div>' + '<br/>' +
                    '<div id=\"' + containerId + '\" ' +
                    'style=\"height:60px;width:160px;margin-top:4px;\"></div>';
