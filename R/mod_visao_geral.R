@@ -37,7 +37,7 @@ mod_visao_geral_ui <- function(id) {
       
       # Abas dentro do card
       navset_card_pill(
-        title = "Tabela de Frequências",
+        title = "Ranking SKUs | Verba",
         nav_panel(
           title = "COO",
           
