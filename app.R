@@ -2,6 +2,7 @@
 # app.R ---------------------------------------------------------------
 library(shiny)
 library(bslib)
+library(bsicons)
 library(dplyr)
 library(tidyverse)
 library(highcharter)
