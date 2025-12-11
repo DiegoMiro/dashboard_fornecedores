@@ -40,7 +40,7 @@ mod_supplier_server <- function(id, dados_filtrados) {
         arrange(season_id) %>%
         mutate(season_factor = fct(season)) %>%
         select(-season_id) %>%
-        left_join(df %>% select(-season_factor)) %>%
+        left_join(df %>% select(-season_factor), "season") %>%
         select(
           season_factor,
           COO = coo,
