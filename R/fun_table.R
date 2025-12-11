@@ -282,7 +282,7 @@ fun_table <- function(tbl) {
   reactable(
     tbl,
     defaultPageSize = 30,
-    searchable = TRUE,
+    searchable = FALSE,
     highlight = TRUE,
     compact = TRUE,
     bordered = FALSE,
