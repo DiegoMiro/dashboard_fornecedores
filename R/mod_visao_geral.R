@@ -8,6 +8,12 @@ mod_visao_geral_ui <- function(id) {
       row_heights = c(2, 3),
       card(
         style = "border: 1px solid #1F5FBF;",
+        card_header(
+          bslib::tooltip(
+            span("SKUs  ", bsicons::bs_icon("info-circle")),
+            "SKUs: Número de Style Numbers diferentes"
+          )
+        ),
         card_body(
           highchartOutput(ns("hc_sku_season"))
         ),
@@ -15,6 +21,12 @@ mod_visao_geral_ui <- function(id) {
       ),
       card(
         style = "border: 1px solid #1EAD74;",
+        card_header(
+          bslib::tooltip(
+            span("Verba  ", bsicons::bs_icon("info-circle")),
+            "Verba: ..."
+          )
+        ),
         card_body(
           highchartOutput(ns("hc_verba_seson"))
         ),
@@ -22,6 +34,12 @@ mod_visao_geral_ui <- function(id) {
       ),
       card(
         style = "border: 1px solid #C1121F;",
+        card_header(
+          bslib::tooltip(
+            span("Custo  ", bsicons::bs_icon("info-circle")),
+            "Custo: ..."
+          )
+        ),
         card_body(
           highchartOutput(ns("hc_custo_season"))
         ),
@@ -29,6 +47,12 @@ mod_visao_geral_ui <- function(id) {
       ),
       card(
         style = "border: 1px solid #F18F01;",
+        card_header(
+          bslib::tooltip(
+            span("Markup  ", bsicons::bs_icon("info-circle")),
+            "Markup: Verba / Custo"
+          )
+        ),
         card_body(
           highchartOutput(ns("hc_markup_season"))
         ),
@@ -37,7 +61,7 @@ mod_visao_geral_ui <- function(id) {
       
       # Abas dentro do card
       navset_card_pill(
-        title = "Ranking SKUs | Verba",
+        title = "Ranking SKUs e Verba",
         nav_panel(
           title = "COO",
           
@@ -264,21 +288,21 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           ),
           min = 0
         ) %>%
+        # hc_title(
+        #   text = "SKUs",
+        #   align = "left",
+        #   style = list(
+        #     color = "#111827",
+        #     fontSize = "14px",
+        #     fontWeight = "bold"
+        #   )
+        # ) %>%
         hc_title(
-          text = "SKUs",
-          align = "left",
-          style = list(
-            color = "#111827",
-            fontSize = "16px",
-            fontWeight = "bold"
-          )
-        ) %>%
-        hc_subtitle(
           text = agg_total,
           align = "left",
           style = list(
             color = "#1F5FBF",
-            fontSize = "24px",
+            fontSize = "20px",
             fontWeight = "bold"
           )
         ) %>%
@@ -345,21 +369,21 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           ),
           min = 0
         ) %>%
+        # hc_title(
+        #   text = "Verba",
+        #   align = "left",
+        #   style = list(
+        #     color = "#111827",
+        #     fontSize = "14px",
+        #     fontWeight = "bold"
+        #   )
+        # ) %>%
         hc_title(
-          text = "Verba",
-          align = "left",
-          style = list(
-            color = "#111827",
-            fontSize = "16px",
-            fontWeight = "bold"
-          )
-        ) %>%
-        hc_subtitle(
           text = agg_total,
           align = "left",
           style = list(
             color = "#1EAD74",
-            fontSize = "24px",
+            fontSize = "20px",
             fontWeight = "bold"
           )
         ) %>%
@@ -425,21 +449,21 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           ),
           min = 0
         ) %>%
+        # hc_title(
+        #   text = "Custo",
+        #   align = "left",
+        #   style = list(
+        #     color = "#111827",
+        #     fontSize = "14px",
+        #     fontWeight = "bold"
+        #   )
+        # ) %>%
         hc_title(
-          text = "Custo",
-          align = "left",
-          style = list(
-            color = "#111827",
-            fontSize = "16px",
-            fontWeight = "bold"
-          )
-        ) %>%
-        hc_subtitle(
           text = agg_total,
           align = "left",
           style = list(
             color = "#C1121F",
-            fontSize = "24px",
+            fontSize = "20px",
             fontWeight = "bold"
           )
         ) %>%
@@ -507,21 +531,21 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
             )
           )
         ) %>%
+        # hc_title(
+        #   text = "Markup",
+        #   align = "left",
+        #   style = list(
+        #     color = "#111827",
+        #     fontSize = "14px",
+        #     fontWeight = "bold"
+        #   )
+        # ) %>%
         hc_title(
-          text = "Markup",
-          align = "left",
-          style = list(
-            color = "#111827",
-            fontSize = "16px",
-            fontWeight = "bold"
-          )
-        ) %>%
-        hc_subtitle(
           text = agg_total,
           align = "left",
           style = list(
             color = "#F18F01",
-            fontSize = "24px",
+            fontSize = "20px",
             fontWeight = "bold"
           )
         ) %>%

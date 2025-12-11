@@ -26,8 +26,7 @@ mod_markup_server <- function(id, dados_filtrados) {
         mutate(season_factor = fct(season)) %>%
         select(season_id, season_factor) %>%
         left_join(
-          df %>%
-            select(-season_factor)
+          df %>% select(-season_factor), "season_id"
         ) %>%
         group_by(
           supplier = final_supplier_production,
@@ -58,7 +57,8 @@ mod_markup_server <- function(id, dados_filtrados) {
           n_seasons    = n_distinct(date),  # ou n_distinct(style_id) se tiver um ID
           markup_ts    = list(markup)       # série de markup ao longo do tempo
         ) %>%
-        ungroup()
+        ungroup() %>%
+        arrange(markup_med)
       
       # categorias do eixo Y
       suppliers <- bubble_data$supplier
@@ -100,21 +100,51 @@ mod_markup_server <- function(id, dados_filtrados) {
         hc_chart(type = "bubble") |>
         hc_title(text = NA) |>
         hc_xAxis(
-          title = list(text = "Markup médio")
+          title = list(text = "Markup médio"),
+          min = floor(min(bubble_data$markup_med)),
+          max = ceiling(max(bubble_data$markup_med) * 1.1)
         ) |>
         hc_yAxis(
-          title = list(text = "Supplier"),
+          title = list(text = NA),
           categories = suppliers,
-          tickInterval = 1
+          labels = list(enabled = FALSE),
+          tickInterval = 1,
+          min = 0,
+          max = length(suppliers) - 1,
+          gridLineWidth = 0
         ) |>
         hc_add_series(
           data = bubble_points,
-          name = "Markup",
+          # name = name,
           color = "#F18F01",
-          maxSize = "5%",
-          minSize = "1%"
+          maxSize = "4%",
+          minSize = "1%",
+          dataLabels = list(
+            enabled = TRUE,
+            format = "{point.name}",  # estilo geom_text
+            align = "left",           # alinhado à esquerda do ponto
+            x = 10,                    # desloca um pouco pra direita da bolha
+            y = 0,
+            style = list(
+              textOutline = "none",
+              fontSize = "10px",
+              color = "#666666"
+            ),
+            allowOverlap = TRUE       # geom_text = pode sobrepor
+          )
         ) |>
         hc_legend(enabled = FALSE) |>
+        hc_chart(
+          events = list(
+            click = JS("
+              function() { 
+                if (this.tooltip) {
+                  this.tooltip.hide();
+                }
+              }"
+            )
+          )
+        ) |>
         hc_tooltip(
           useHTML = TRUE,
           followPointer = TRUE,
@@ -130,9 +160,9 @@ mod_markup_server <- function(id, dados_filtrados) {
                    'Total verba: ' + Highcharts.numberFormat(point.z, 0, ',', '.') + '<br/>' +
                    'Styles: ' + point.styles + '<br/>' +
                    'Seasons: ' + point.seasons + '<br/>' + '<br/>' +
-                   '<div style=\"color:#F18F01;font-weight: bold;\">Markup médio: ' + Highcharts.numberFormat(point.x, 2, ',', '.') + '</div>' + '<br/>' +
+                   '<div style=\"color:#F18F01; font-weight:bold;\">Markup médio: ' + Highcharts.numberFormat(point.x, 2, ',', '.') + '</div>' + '<br/>' +
                    '<div id=\"' + containerId + '\" ' +
-                   'style=\"height:60px;width:160px;margin-top:4px;\"></div>';
+                   'style=\"height:60px; width:160px; margin-top:4px;\"></div>';
 
         // desenha o sparkline dentro do tooltip
         setTimeout(function () {
