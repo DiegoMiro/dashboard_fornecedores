@@ -24,32 +24,32 @@ mod_supplier_server <- function(id, dados_filtrados) {
       df <- dados_filtrados()
       req(nrow(df) > 0)
       
-      # flags <- tribble(
-      #   ~"COO", ~"FLAG",
-      #   "BRAZIL"   , "🇧🇷",
-      #   "CHINA"    , "🇨🇳",
-      #   "INDIA"    , "🇮🇳",
-      #   "ITALY"    , "🇮🇹",
-      #   "MOROCCO"  , "🇲🇦",
-      #   "TURKEY"   , "🇹🇷"
-      # )
-      
       flags <- tribble(
-        ~"COO", ~"FLAG_old",
+        ~"COO", ~"FLAG",
         "BRAZIL"   , "🇧🇷",
         "CHINA"    , "🇨🇳",
         "INDIA"    , "🇮🇳",
         "ITALY"    , "🇮🇹",
         "MOROCCO"  , "🇲🇦",
         "TURKEY"   , "🇹🇷"
-      ) %>%
-        mutate(
-          iso2   = countrycode(COO, "country.name", "iso2c"),
-          FLAG = vapply(iso2, iso2_to_flag, character(1))#,
-          # 3) Coluna HTML: bandeira + país
-          # pais_flag_html = sprintf("%s&nbsp;%s", bandeira, COO)
-        ) %>%
-        select(COO, FLAG)
+      )
+      
+      # flags <- tribble(
+      #   ~"COO", ~"FLAG_old",
+      #   "BRAZIL"   , "🇧🇷",
+      #   "CHINA"    , "🇨🇳",
+      #   "INDIA"    , "🇮🇳",
+      #   "ITALY"    , "🇮🇹",
+      #   "MOROCCO"  , "🇲🇦",
+      #   "TURKEY"   , "🇹🇷"
+      # ) %>%
+      #   mutate(
+      #     iso2   = countrycode(COO, "country.name", "iso2c"),
+      #     FLAG = vapply(iso2, iso2_to_flag, character(1))#,
+      #     # 3) Coluna HTML: bandeira + país
+      #     # pais_flag_html = sprintf("%s&nbsp;%s", bandeira, COO)
+      #   ) %>%
+      #   select(COO, FLAG)
       
       tbl_1 <- df %>%
         distinct(season_id, season) %>%
