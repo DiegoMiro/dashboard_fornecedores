@@ -3,8 +3,8 @@
   "locale": "en_US",
   "platform": "4.5.1",
   "metadata": {
-    "appmode": "rmd-static",
-    "primary_rmd": "s.rmd",
+    "appmode": "shiny",
+    "primary_rmd": null,
     "primary_html": null,
     "content_category": null,
     "has_parameters": false
@@ -548,6 +548,33 @@
         "RemoteRef": "broom",
         "RemoteRepos": "https://cran.rstudio.com",
         "RemoteSha": "1.0.10"
+      }
+    },
+    "bsicons": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com",
+      "description": {
+        "Package": "bsicons",
+        "Title": "Easily Work with 'Bootstrap' Icons",
+        "Version": "0.1.2",
+        "Authors@R": "c(\n    person(\"Carson\", \"Sievert\", , \"carson@posit.co\", role = c(\"cre\", \"aut\"),\n           comment = c(ORCID = \"0000-0002-4958-2844\")),\n    person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")),\n    person(\"Mark\", \"Otto\", role = \"cph\",\n           comment = \"Bootstrap icons maintainer\")\n  )",
+        "Description": "Easily use 'Bootstrap' icons inside 'Shiny' apps and 'R\n    Markdown' documents. More generally, icons can be inserted in any\n    'htmltools' document through inline 'SVG'.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://github.com/rstudio/bsicons",
+        "BugReports": "https://github.com/rstudio/bsicons/issues",
+        "Depends": "R (>= 2.10)",
+        "Imports": "cli, htmltools, rlang, utils",
+        "Suggests": "bslib, processx, testthat, webshot2, withr",
+        "Config/testthat/edition": "3",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.2.3",
+        "NeedsCompilation": "no",
+        "Packaged": "2023-11-03 23:29:00 UTC; cpsievert",
+        "Author": "Carson Sievert [cre, aut] (<https://orcid.org/0000-0002-4958-2844>),\n  Posit Software, PBC [cph, fnd],\n  Mark Otto [cph] (Bootstrap icons maintainer)",
+        "Maintainer": "Carson Sievert <carson@posit.co>",
+        "Repository": "CRAN",
+        "Date/Publication": "2023-11-04 00:30:05 UTC",
+        "Built": "R 4.5.0; ; 2025-04-01 07:48:51 UTC; unix"
       }
     },
     "bslib": {
@@ -1123,36 +1150,6 @@
         "Date/Publication": "2024-05-15 09:00:07 UTC",
         "Built": "R 4.5.0; aarch64-apple-darwin20; 2025-03-31 21:43:00 UTC; unix",
         "Archs": "fastmap.so.dSYM"
-      }
-    },
-    "flexdashboard": {
-      "Source": "CRAN",
-      "Repository": "https://cran.rstudio.com",
-      "description": {
-        "Type": "Package",
-        "Package": "flexdashboard",
-        "Title": "R Markdown Format for Flexible Dashboards",
-        "Version": "0.6.2",
-        "Authors@R": "c(\n    person(\"Garrick\", \"Aden-Buie\", , \"garrick@posit.co\", role = c(\"aut\", \"cre\"),\n           comment = c(ORCID = \"0000-0002-7111-0077\")),\n    person(\"Carson\", \"Sievert\", , \"carson@posit.co\", role = \"aut\",\n           comment = c(ORCID = \"0000-0002-4958-2844\")),\n    person(\"Richard\", \"Iannone\", , \"rich@posit.co\", role = \"aut\",\n           comment = c(ORCID = \"0000-0003-3925-190X\")),\n    person(\"JJ\", \"Allaire\", , \"jj@posit.co\", role = \"aut\"),\n    person(\"Barbara\", \"Borges\", , \"barb.b.ribeiro@gmail.com\", role = \"aut\"),\n    person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")),\n    person(, \"Keen IO\", role = c(\"ctb\", \"cph\"),\n           comment = \"Dashboard CSS\"),\n    person(\"Abdullah\", \"Almsaeed\", role = c(\"ctb\", \"cph\"),\n           comment = \"Dashboard CSS\"),\n    person(\"Jonas\", \"Mosbech\", role = c(\"ctb\", \"cph\"),\n           comment = \"StickyTableHeaders\"),\n    person(\"Noel\", \"Bossart\", role = c(\"ctb\", \"cph\"),\n           comment = \"Featherlight\"),\n    person(\"Lea\", \"Verou\", role = c(\"ctb\", \"cph\"),\n           comment = \"Prism\"),\n    person(\"Dmitry\", \"Baranovskiy\", role = c(\"ctb\", \"cph\"),\n           comment = \"Raphael.js\"),\n    person(, \"Sencha Labs\", role = c(\"ctb\", \"cph\"),\n           comment = \"Raphael.js\"),\n    person(\"Bojan\", \"Djuricic\", role = c(\"ctb\", \"cph\"),\n           comment = \"JustGage\"),\n    person(\"Tomas\", \"Sardyha\", role = c(\"ctb\", \"cph\"),\n           comment = \"Sly\"),\n    person(\"Bryan\", \"Lewis\", role = c(\"ctb\", \"cph\"),\n           comment = \"Examples\"),\n    person(\"Joshua\", \"Kunst\", role = c(\"ctb\", \"cph\"),\n           comment = \"Examples\"),\n    person(\"Ryan\", \"Hafen\", role = c(\"ctb\", \"cph\"),\n           comment = \"Examples\"),\n    person(\"Bob\", \"Rudis\", role = c(\"ctb\", \"cph\"),\n           comment = \"Examples\"),\n    person(\"Joe\", \"Cheng\", role = \"ctb\",\n           comment = \"Examples\")\n  )",
-        "Description": "Format for converting an R Markdown document to a grid\n    oriented dashboard. The dashboard flexibly adapts the size of it's\n    components to the containing web page.",
-        "License": "MIT + file LICENSE",
-        "URL": "https://pkgs.rstudio.com/flexdashboard/,\nhttps://github.com/rstudio/flexdashboard/",
-        "BugReports": "https://github.com/rstudio/flexdashboard/issues",
-        "Depends": "R (>= 3.0.2)",
-        "Imports": "bslib (>= 0.2.5), grDevices, htmltools (>= 0.5.1), htmlwidgets\n(>= 0.6), jsonlite, knitr (>= 1.30), rmarkdown (>= 2.8), sass,\nscales, shiny (>= 0.13), tools, utils",
-        "Suggests": "testthat",
-        "Config/Needs/deploy": "dplyr, ggplot2, DT, talgalili/d3heatmap, plotly,\nplyr, biclust, webshot, bit, jcheng5/bubbles, digest,\nhadley/shinySignals, dygraphs, quantmod, forecast, highcharter,\narules, treemap, viridisLite, leaflet, metricsgraphics, rbokeh,\nreadr, tidyr, jsonlite, maptools, purrr, maps, hexbin",
-        "Config/Needs/website": "rstudio/quillt",
-        "Config/testthat/edition": "3",
-        "Encoding": "UTF-8",
-        "RoxygenNote": "7.2.3",
-        "NeedsCompilation": "no",
-        "Packaged": "2023-08-11 20:48:46 UTC; garrick",
-        "Author": "Garrick Aden-Buie [aut, cre] (<https://orcid.org/0000-0002-7111-0077>),\n  Carson Sievert [aut] (<https://orcid.org/0000-0002-4958-2844>),\n  Richard Iannone [aut] (<https://orcid.org/0000-0003-3925-190X>),\n  JJ Allaire [aut],\n  Barbara Borges [aut],\n  Posit Software, PBC [cph, fnd],\n  Keen IO [ctb, cph] (Dashboard CSS),\n  Abdullah Almsaeed [ctb, cph] (Dashboard CSS),\n  Jonas Mosbech [ctb, cph] (StickyTableHeaders),\n  Noel Bossart [ctb, cph] (Featherlight),\n  Lea Verou [ctb, cph] (Prism),\n  Dmitry Baranovskiy [ctb, cph] (Raphael.js),\n  Sencha Labs [ctb, cph] (Raphael.js),\n  Bojan Djuricic [ctb, cph] (JustGage),\n  Tomas Sardyha [ctb, cph] (Sly),\n  Bryan Lewis [ctb, cph] (Examples),\n  Joshua Kunst [ctb, cph] (Examples),\n  Ryan Hafen [ctb, cph] (Examples),\n  Bob Rudis [ctb, cph] (Examples),\n  Joe Cheng [ctb] (Examples)",
-        "Maintainer": "Garrick Aden-Buie <garrick@posit.co>",
-        "Repository": "CRAN",
-        "Date/Publication": "2023-08-11 21:40:02 UTC",
-        "Built": "R 4.5.0; ; 2025-04-02 01:09:28 UTC; unix"
       }
     },
     "fontawesome": {
@@ -4046,158 +4043,44 @@
     }
   },
   "files": {
-    "analise_forncedores.csv": {
-      "checksum": "91ff9f4a591de38bc0b742181312e8bc"
-    },
-    "dashboard_fornecedores/.gitattributes": {
+    ".gitattributes": {
       "checksum": "05bdb783ee6514c8c072e47680af8ff7"
     },
-    "dashboard_fornecedores/analise_forncedores.csv": {
-      "checksum": "91ff9f4a591de38bc0b742181312e8bc"
+    "analise_forncedores.csv": {
+      "checksum": "c7c63ea41141a09f7e3c7d20c8764e0f"
     },
-    "dashboard_fornecedores/app.R": {
-      "checksum": "e033aab347f4e80acad76c74a6cb5688"
+    "app.R": {
+      "checksum": "76ef959079dfd2e111c7fe1845e1d550"
     },
-    "dashboard_fornecedores/R/fun_table.r": {
-      "checksum": "a7d91092ee33e85075a7e3e5812bc3ea"
+    "R/fun_table.R": {
+      "checksum": "5f7fcdd3ca629205ef612e15aec76a1e"
     },
-    "dashboard_fornecedores/R/mod_fabric.R": {
-      "checksum": "f8b1e85bfe0e3500e8c46e6c5bf4775b"
+    "R/mod_fabric.R": {
+      "checksum": "7a278778221a393e7a269a6de9a3fd49"
     },
-    "dashboard_fornecedores/R/mod_filters.R": {
-      "checksum": "84b2c7fcd9a7e987ec7da22b2256b37a"
+    "R/mod_filters.R": {
+      "checksum": "d570449f3a65eb2a4fc423e7f65495ce"
     },
-    "dashboard_fornecedores/R/mod_fornecedores.R": {
+    "R/mod_final_fabric.R": {
+      "checksum": "65ca97e376dbdf25b41cd0cc38b4d3ee"
+    },
+    "R/mod_fornecedores.R": {
       "checksum": "80a8fc6b43537f01e77973e190433ffa"
     },
-    "dashboard_fornecedores/R/mod_geografia.R": {
+    "R/mod_geografia.R": {
       "checksum": "b449adfa47e1dea1e72f46b227e5ae99"
     },
-    "dashboard_fornecedores/R/mod_markup.R": {
-      "checksum": "e2c7ae37860425e90f1ab049f82060db"
+    "R/mod_markup.R": {
+      "checksum": "2c07813d547e04e846b09a079b1cbd1b"
     },
-    "dashboard_fornecedores/R/mod_supplier.R": {
-      "checksum": "dcccc7a3c976d77b6a4c0f34c38fcaee"
+    "R/mod_supplier.R": {
+      "checksum": "a9ccd1e527164e0cc677130a2b7b551a"
     },
-    "dashboard_fornecedores/R/mod_visao_geral.R": {
-      "checksum": "7f0b6016a9b8b2696cccfc8bb9f5ac20"
+    "R/mod_visao_geral.R": {
+      "checksum": "9c15c2f732432c4dfcb925f02c304216"
     },
-    "dashboard_fornecedores/R/theme_farm_rio.R": {
-      "checksum": "70e6adae64ec40d0a16eeb3a247f8c3a"
-    },
-    "dashboard_test.r": {
-      "checksum": "81218d1a8e860349de230a5738cf41d8"
-    },
-    "data/ANALISE FORNECIMENTO.xlsx": {
-      "checksum": "95154344a20a91770c59ea47e2f831f8"
-    },
-    "data/old/ANALISE FORNECIMENTO.xlsx": {
-      "checksum": "608ed2363c9a4b020b997215ed825b0a"
-    },
-    "dataset.csv": {
-      "checksum": "526b6da2147bec46a1af89ecef9e2b50"
-    },
-    "farm_rio_dashboard 2/analise_forncedores.csv": {
-      "checksum": "106ac2b678bd1fca111be660ccc87f15"
-    },
-    "farm_rio_dashboard 2/app2.R": {
-      "checksum": "4a44d1ade2c74a6491ab52c09d5d3811"
-    },
-    "farm_rio_dashboard 2/R/mod_filters.R": {
-      "checksum": "aefba37d2ce47b38796fc95b1b6a6205"
-    },
-    "farm_rio_dashboard 2/R/mod_fornecedores.R": {
-      "checksum": "3ad47ab87ad7c53f3aa66e418a977381"
-    },
-    "farm_rio_dashboard 2/R/mod_geografia.R": {
-      "checksum": "78537f75be992abd1acf3c29b8a2bcd7"
-    },
-    "farm_rio_dashboard 2/R/mod_visao_geral.R": {
-      "checksum": "77d609f47220b448a50c4049b75f8045"
-    },
-    "farm_rio_dashboard 2/R/theme_farm_rio.R": {
-      "checksum": "b4300511467c7f6dabdec47dd15ff96c"
-    },
-    "farm_rio_dashboard_shinywidgets.zip": {
-      "checksum": "363290869aa668c7a84a0dc8a65c843e"
-    },
-    "farm_rio_dashboard.zip": {
-      "checksum": "f328ddd64f33749fd030b6ab6f19597a"
-    },
-    "farm_rio_dashboard/analise_forncedores.csv": {
-      "checksum": "91ff9f4a591de38bc0b742181312e8bc"
-    },
-    "farm_rio_dashboard/app.R": {
-      "checksum": "e033aab347f4e80acad76c74a6cb5688"
-    },
-    "farm_rio_dashboard/R/fun_table.r": {
-      "checksum": "a7d91092ee33e85075a7e3e5812bc3ea"
-    },
-    "farm_rio_dashboard/R/mod_fabric.R": {
-      "checksum": "f8b1e85bfe0e3500e8c46e6c5bf4775b"
-    },
-    "farm_rio_dashboard/R/mod_filters.R": {
-      "checksum": "84b2c7fcd9a7e987ec7da22b2256b37a"
-    },
-    "farm_rio_dashboard/R/mod_fornecedores.R": {
-      "checksum": "80a8fc6b43537f01e77973e190433ffa"
-    },
-    "farm_rio_dashboard/R/mod_geografia.R": {
-      "checksum": "b449adfa47e1dea1e72f46b227e5ae99"
-    },
-    "farm_rio_dashboard/R/mod_markup.R": {
-      "checksum": "e2c7ae37860425e90f1ab049f82060db"
-    },
-    "farm_rio_dashboard/R/mod_supplier.R": {
-      "checksum": "dcccc7a3c976d77b6a4c0f34c38fcaee"
-    },
-    "farm_rio_dashboard/R/mod_visao_geral.R": {
-      "checksum": "7f0b6016a9b8b2696cccfc8bb9f5ac20"
-    },
-    "farm_rio_dashboard/R/theme_farm_rio.R": {
-      "checksum": "70e6adae64ec40d0a16eeb3a247f8c3a"
-    },
-    "final_fabric.html": {
-      "checksum": "c5ad62ab6a3776666f06e2bede0b0924"
-    },
-    "HS26 APRESENTAÇÃO.pdf": {
-      "checksum": "2bb63e880d19c176db0d3f0bd8972a1c"
-    },
-    "MAIN_FABRIC_COMPOSITION.xlsx": {
-      "checksum": "45ac00c1bbf764eef961a806928f743d"
-    },
-    "Rplot.png": {
-      "checksum": "7702a3d7bfbfa8997440149b89a00859"
-    },
-    "s.html": {
-      "checksum": "e8a132c7a8575eec586e432362cd2c56"
-    },
-    "s.rmd": {
-      "checksum": "fd520edf401bcd6f66baef80e75be4ed"
-    },
-    "Sem Título.html": {
-      "checksum": "33982db563778b8dce0455f861e4ccba"
-    },
-    "src/fun_table.r": {
-      "checksum": "17efa340a3c5cb868331079cb4374cb4"
-    },
-    "supplier_by_season.png": {
-      "checksum": "28d4f9d7d78c288cdd93ad4a69b7c6c6"
-    },
-    "tbl_2.csv": {
-      "checksum": "2656749679952313fb60ca0a1f1bcd15"
-    },
-    "tbl.csv": {
-      "checksum": "58934c78b0a07e54f6f7d0fef19fe8e4"
-    },
-    "tbl1.html": {
-      "checksum": "bea3cefd0ae21c6efd4a63be30e4a766"
-    },
-    "tbl2.html": {
-      "checksum": "652b923ea4c63c61240c739d44a24b2e"
-    },
-    "teste.xlsx": {
-      "checksum": "469aa538988fc76cfeae75340e485f2a"
+    "R/theme_farm_rio.R": {
+      "checksum": "68626abe576fd4970ecdb1dda43beacc"
     }
   },
   "users": null
