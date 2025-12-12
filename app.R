@@ -18,8 +18,9 @@ source("R/fun_table.R")
 source("R/theme_farm_rio.R")
 source("R/mod_filters.R")
 source("R/mod_visao_geral.R")
-source("R/mod_supplier.R")
-source("R/mod_final_fabric.R")
+# source("R/mod_supplier.R")
+# source("R/mod_final_fabric.R")
+source("R/mod_by_season.R")
 
 source("R/mod_markup.R")
 
@@ -62,8 +63,9 @@ ui <- page_navbar(
   ),
 
   nav_panel("Visão geral",  mod_visao_geral_ui("visao_geral")),
-  nav_panel("Supplier",     mod_supplier_ui("supplier")),
-  nav_panel("Final Fabric", mod_final_fabric_ui("final_fabric")),
+  # nav_panel("Supplier",     mod_supplier_ui("supplier")),
+  # nav_panel("Final Fabric", mod_final_fabric_ui("final_fabric")),
+  nav_panel("By Season", mod_by_season_ui("by_season")),
   nav_panel("Markup",       mod_markup_ui("markup")),
 )
 
@@ -78,8 +80,9 @@ server <- function(input, output, session) {
 
   # módulos de conteúdo
   mod_visao_geral_server("visao_geral",  dados_filtrados)
-  mod_supplier_server("supplier",        dados_filtrados)
-  mod_final_fabric_server("final_fabric", dados_filtrados)
+  # mod_supplier_server("supplier",        dados_filtrados)
+  # mod_final_fabric_server("final_fabric", dados_filtrados)
+  mod_by_season_server("by_season", dados_filtrados)
   mod_markup_server("markup",            dados_filtrados)
 }
 
