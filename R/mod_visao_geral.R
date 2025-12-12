@@ -277,36 +277,36 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           labels = list(
             style = list(
               fontSize = "8px"
-            ),
-            useHTML = TRUE#,
-      #       formatter = htmlwidgets::JS("
-      #   function () {
-      #     var label = this.value;
-      # 
-      #     // separa tipo e ano
-      #     var tipo = label.replace(/[0-9]/g, '');
-      #     var ano  = parseInt(label.match(/[0-9]+/)[0]); // 24, 25, 26...
-      # 
-      #     // converte para ano completo
-      #     var anoFull = 2000 + ano; // 2024, 2025, 2026
-      # 
-      #     // verifica o label anterior
-      #     var prev = this.axis.categories[this.pos - 1];
-      #     var prevAno = prev ? 2000 + parseInt(prev.match(/[0-9]+/)[0]) : null;
-      # 
-      #     // só mostra o ano quando ele muda
-      #     var showYear = (!prevAno || prevAno !== anoFull);
-      # 
-      #     return '<div style=\"text-align:center;line-height:1.2\">' +
-      #              '<div>' + tipo + '</div>' +
-      #              (showYear
-      #                ? '<div style=\"font-size:10px;color:#666\">' + anoFull + '</div>'
-      #                : '<div>&nbsp;</div>') +
-      #            '</div>';
-      #   }
-      # ")
+            )#,
+            # useHTML = TRUE#,
+            #       formatter = htmlwidgets::JS("
+            #   function () {
+            #     var label = this.value;
+            # 
+            #     // separa tipo e ano
+            #     var tipo = label.replace(/[0-9]/g, '');
+            #     var ano  = parseInt(label.match(/[0-9]+/)[0]); // 24, 25, 26...
+            # 
+            #     // converte para ano completo
+            #     var anoFull = 2000 + ano; // 2024, 2025, 2026
+            # 
+            #     // verifica o label anterior
+            #     var prev = this.axis.categories[this.pos - 1];
+            #     var prevAno = prev ? 2000 + parseInt(prev.match(/[0-9]+/)[0]) : null;
+            # 
+            #     // só mostra o ano quando ele muda
+            #     var showYear = (!prevAno || prevAno !== anoFull);
+            # 
+            #     return '<div style=\"text-align:center;line-height:1.2\">' +
+            #              '<div>' + tipo + '</div>' +
+            #              (showYear
+            #                ? '<div style=\"font-size:10px;color:#666\">' + anoFull + '</div>'
+            #                : '<div>&nbsp;</div>') +
+            #            '</div>';
+            #   }
+            # ")
           )
-          ) %>%
+        ) %>%
         hc_yAxis(
           title = list(text = NA),
           labels = list(
