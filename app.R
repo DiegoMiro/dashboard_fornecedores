@@ -48,7 +48,7 @@ dados <- read_csv(
 
 ui <- page_navbar(
   title = div(
-      div("🌺", "Farm Rio", class = "farm-brand-title")#,
+      div("🌺", "Farm Rio: Fornecedores", class = "farm-brand-title")#,
       # tags$small("Fornecedores")
   ),
   theme  = farm_theme(),
