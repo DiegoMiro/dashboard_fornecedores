@@ -5,7 +5,7 @@ mod_visao_geral_ui <- function(id) {
   tagList(
     layout_columns(
       col_widths = c(3, 3, 3, 3, 12),
-      row_heights = c(2, 3),
+      row_heights = c(1, 2),
       card(
         style = "border: 1px solid #1F5FBF;",
         # card_header(
@@ -17,7 +17,7 @@ mod_visao_geral_ui <- function(id) {
         card_header(
           bslib::tooltip(
             span(
-              span("SKUs", style = "font-weight:bold; font-family: 'Helvetica', sans-serif; font-size:16px;"),
+              span("SKUs", style = "font-size:16px;"),
               span(bsicons::bs_icon("info-circle", width = "14px"))
             ),
             "Número de Style Numbers diferentes"
@@ -33,7 +33,7 @@ mod_visao_geral_ui <- function(id) {
         card_header(
           bslib::tooltip(
             span(
-              span("Verba", style = "font-weight:bold; font-family: 'Helvetica', sans-serif; font-size:16px;"),
+              span("Verba", style = "font-size:16px;"),
               span(bsicons::bs_icon("info-circle", width = "14px"))
             ),
             "Quantidade X Preço de Venda"
@@ -49,7 +49,7 @@ mod_visao_geral_ui <- function(id) {
         card_header(
           bslib::tooltip(
             span(
-              span("Custo", style = "font-weight:bold; font-family: 'Helvetica', sans-serif; font-size:16px;"),
+              span("Custo", style = "font-size:16px;"),
               span(bsicons::bs_icon("info-circle", width = "14px"))
             ),
             "Quantidade X Custo Unitário"
@@ -65,7 +65,7 @@ mod_visao_geral_ui <- function(id) {
         card_header(
           bslib::tooltip(
             span(
-              span("Markup", style = "font-weight:bold; font-family: 'Helvetica', sans-serif; font-size:16px;"),
+              span("Markup", style = "font-size:16px;"),
               span(bsicons::bs_icon("info-circle", width = "14px"))
             ),
             "Verba / Custo"
@@ -174,17 +174,17 @@ mod_visao_geral_ui <- function(id) {
 mod_visao_geral_server <- function(id, dados_filtrados) {
   moduleServer(id, function(input, output, session) {
     
-    output$kpi_title <- renderText({
-      df <- dados_filtrados()
-      n_season <- length(unique(df$season))
-      n_month  <- length(unique(df$on_floor_month))
-      glue("{n_season} season(s) · {n_month} mês(es) no piso")
-    })
-    
-    output$kpi_styles <- renderText({
-      df <- dados_filtrados()
-      dplyr::n_distinct(df$style_number)
-    })
+    # output$kpi_title <- renderText({
+    #   df <- dados_filtrados()
+    #   n_season <- length(unique(df$season))
+    #   n_month  <- length(unique(df$on_floor_month))
+    #   glue("{n_season} season(s) · {n_month} mês(es) no piso")
+    # })
+    # 
+    # output$kpi_styles <- renderText({
+    #   df <- dados_filtrados()
+    #   dplyr::n_distinct(df$style_number)
+    # })
     
     # output$kpi_custo_total <- renderText({
     #   df <- dados_filtrados()
@@ -261,7 +261,17 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
         gt:::vec_fmt_integer(sep_mark = ".")
       
       highchart() %>%
-        hc_chart(type = "line") %>%
+        hc_chart(
+          type = "line",
+          spacingTop = 0,
+          spacingBottom = 0,
+          spacingLeft = 0,
+          spacingRight = 0#,
+          # marginTop = 0,
+          # marginBottom = 0,
+          # marginLeft = 0,
+          # marginRight = 0
+        ) %>%
         hc_xAxis(
           categories = df_agg$season_factor,
           labels = list(
@@ -306,15 +316,6 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           ),
           min = 0
         ) %>%
-        # hc_title(
-        #   text = "SKUs",
-        #   align = "left",
-        #   style = list(
-        #     color = "#111827",
-        #     fontSize = "14px",
-        #     fontWeight = "bold"
-        #   )
-        # ) %>%
         hc_title(
           text = agg_total,
           align = "left",
@@ -369,7 +370,13 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
         gt:::vec_fmt_currency(decimals = 0, sep_mark = ".", dec_mark = ",")
       
       highchart() %>%
-        hc_chart(type = "line") %>%
+        hc_chart(
+          type = "line",
+          spacingTop = 0,
+          spacingBottom = 0,
+          spacingLeft = 0,
+          spacingRight = 0
+        ) %>%
         hc_xAxis(
           categories = df_agg$season_factor,
           labels = list(
@@ -387,15 +394,6 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           ),
           min = 0
         ) %>%
-        # hc_title(
-        #   text = "Verba",
-        #   align = "left",
-        #   style = list(
-        #     color = "#111827",
-        #     fontSize = "14px",
-        #     fontWeight = "bold"
-        #   )
-        # ) %>%
         hc_title(
           text = agg_total,
           align = "left",
@@ -449,7 +447,13 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
         gt:::vec_fmt_currency(decimals = 0, sep_mark = ".", dec_mark = ",")
       
       highchart() %>%
-        hc_chart(type = "line") %>%
+        hc_chart(
+          type = "line",
+          spacingTop = 0,
+          spacingBottom = 0,
+          spacingLeft = 0,
+          spacingRight = 0
+        ) %>%
         hc_xAxis(
           categories = df_agg$season_factor,
           labels = list(
@@ -467,15 +471,6 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           ),
           min = 0
         ) %>%
-        # hc_title(
-        #   text = "Custo",
-        #   align = "left",
-        #   style = list(
-        #     color = "#111827",
-        #     fontSize = "14px",
-        #     fontWeight = "bold"
-        #   )
-        # ) %>%
         hc_title(
           text = agg_total,
           align = "left",
@@ -532,7 +527,13 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
         gt:::vec_fmt_number(decimals = 2, sep_mark = ".", dec_mark = ",")
       
       highchart() %>%
-        hc_chart(type = "line") %>%
+        hc_chart(
+          type = "line",
+          spacingTop = 0,
+          spacingBottom = 0,
+          spacingLeft = 0,
+          spacingRight = 0
+        ) %>%
         hc_xAxis(
           categories = df_agg$season_factor,
           labels = list(
@@ -549,15 +550,6 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
             )
           )
         ) %>%
-        # hc_title(
-        #   text = "Markup",
-        #   align = "left",
-        #   style = list(
-        #     color = "#111827",
-        #     fontSize = "14px",
-        #     fontWeight = "bold"
-        #   )
-        # ) %>%
         hc_title(
           text = agg_total,
           align = "left",
