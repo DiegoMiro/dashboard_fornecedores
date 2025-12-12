@@ -73,29 +73,32 @@ mod_markup_server <- function(id, dados_filtrados) {
       # Highcharts precisa de valores numéricos para Y quando usamos categories
       bubble_data <- bubble_data %>%
         mutate(
+          datalabels_x = (total_verba / max(total_verba)) * 15,
           y_index = seq_along(supplier) - 1  # 0,1,2,... para usar como índice das categorias
         )
       
       # Transformar em lista de pontos com campos extras p/ tooltip
       bubble_points <- pmap(
         list(
-          x         = bubble_data$markup_med,
-          y         = bubble_data$y_index,
-          z         = bubble_data$total_verba,
-          name      = bubble_data$supplier,
-          spark     = bubble_data$markup_ts,
-          styles_n  = bubble_data$n_styles,
-          seasons_n = bubble_data$n_seasons
+          x            = bubble_data$markup_med,
+          y            = bubble_data$y_index,
+          z            = bubble_data$total_verba,
+          name         = bubble_data$supplier,
+          spark        = bubble_data$markup_ts,
+          styles_n     = bubble_data$n_styles,
+          seasons_n    = bubble_data$n_seasons,
+          datalabels_x = bubble_data$datalabels_x
         ),
-        function(x, y, z, name, spark, styles_n, seasons_n) {
+        function(x, y, z, name, spark, styles_n, seasons_n, datalabels_x) {
           list(
-            x       = x,
-            y       = y,
-            z       = z,
-            name    = name,
-            spark   = spark,      # série de markup ao longo do tempo
-            styles  = styles_n,   # número de styles
-            seasons = seasons_n   # número de styles
+            x            = x,
+            y            = y,
+            z            = z,
+            name         = name,
+            spark        = spark,      # série de markup ao longo do tempo
+            styles       = styles_n,   # número de styles
+            seasons      = seasons_n,  # número de styles
+            datalabels_x = datalabels_x
           )
         }
       )
@@ -131,7 +134,12 @@ mod_markup_server <- function(id, dados_filtrados) {
             enabled = TRUE,
             format = "{point.name}",  # estilo geom_text
             align = "left",           # alinhado à esquerda do ponto
-            x = 10,                    # desloca um pouco pra direita da bolha
+            x = 10,
+            # x = JS("
+            #     function () {
+            #       return this.point.datalabels_x;
+            #     }"
+            # ), # desloca um pouco pra direita da bolha
             y = 0,
             style = list(
               textOutline = "none",
