@@ -108,7 +108,7 @@ mod_markup_server <- function(id, dados_filtrados) {
         hc_title(text = NA) |>
         hc_xAxis(
           title = list(text = "Markup médio"),
-          min = floor(min(bubble_data$markup_med)),
+          min = floor(min(bubble_data$markup_med) * 0.9),
           max = ceiling(max(bubble_data$markup_med) * 1.1)
         ) |>
         hc_yAxis(

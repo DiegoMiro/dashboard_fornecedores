@@ -277,8 +277,8 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           labels = list(
             style = list(
               fontSize = "8px"
-            )#,
-            # useHTML = TRUE#,
+            ),
+            useHTML = TRUE#,
             #       formatter = htmlwidgets::JS("
             #   function () {
             #     var label = this.value;
@@ -382,7 +382,8 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           labels = list(
             style = list(
               fontSize = "8px"
-            )
+            ),
+            useHTML = TRUE
           )
         ) %>%
         hc_yAxis(
@@ -459,7 +460,8 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           labels = list(
             style = list(
               fontSize = "8px"
-            )
+            ),
+            useHTML = TRUE
           )
         ) %>%
         hc_yAxis(
@@ -539,7 +541,8 @@ mod_visao_geral_server <- function(id, dados_filtrados) {
           labels = list(
             style = list(
               fontSize = "8px"
-            )
+            ),
+            useHTML = TRUE
           )
         ) %>%
         hc_yAxis(
