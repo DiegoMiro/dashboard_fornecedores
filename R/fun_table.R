@@ -244,7 +244,7 @@ fun_table <- function(tbl) {
           width = 120,
           style = list(
             borderLeft = "1px solid #cecfd3",
-            background = if_else(str_detect(col, "TOTAL"), "#f9fafb", "white")
+            background = if_else(str_detect(col, "TOTAL"), "#FDF4EB", "#FFF9F0")
           ),
           cell = function(value, index) {
             make_cell_qtd_pct_bar(value, total_col)
@@ -264,7 +264,7 @@ fun_table <- function(tbl) {
           html = TRUE,
           width = 120,
           style = list(
-            background = if_else(str_detect(col, "TOTAL"), "#f9fafb", "white")
+            background = if_else(str_detect(col, "TOTAL"), "#FDF4EB", "#FFF9F0")
           ),
           cell = function(value, index) {
             make_cell_dollar_pct_bar(value, total_col)
@@ -311,6 +311,7 @@ fun_table <- function(tbl) {
         # fontSize = "1rem"
       ),
       headerStyle = list(
+        backgroundColor = "#FFF9F0",
         # background = "#111827",
         # color = "#ffffff",
         fontWeight = "600"#,
@@ -320,7 +321,7 @@ fun_table <- function(tbl) {
       footerStyle = list(
         fontWeight = "600",
         borderTop = "2px solid #4b5563",
-        background = "#f9fafb"
+        backgroundColor = "#FDF4EB"
       )
     )
   )

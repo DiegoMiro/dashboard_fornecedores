@@ -5,8 +5,15 @@ mod_markup_ui <- function(id) {
   
   card(
     full_screen = TRUE,
+    
     card_header(
-      "Markup by Supplier"
+      bslib::tooltip(
+        span(
+          span("Markup by Supplier", style = "font-weight:bold; font-family: 'Helvetica', sans-serif; font-size:16px;"),
+          span(bsicons::bs_icon("info-circle", width = "14px"))
+        ),
+        "Bubble Chart: o diâmetro da bolha representa o total da verba"
+      )
     ),
     card_body(
       highchartOutput(ns("hc_markup"))

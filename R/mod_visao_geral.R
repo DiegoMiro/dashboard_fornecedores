@@ -8,10 +8,19 @@ mod_visao_geral_ui <- function(id) {
       row_heights = c(2, 3),
       card(
         style = "border: 1px solid #1F5FBF;",
+        # card_header(
+        #   bslib::tooltip(
+        #     span("SKUs  ", bsicons::bs_icon("info-circle")),
+        #     "SKUs: Número de Style Numbers diferentes"
+        #   )
+        # ),
         card_header(
           bslib::tooltip(
-            span("SKUs  ", bsicons::bs_icon("info-circle")),
-            "SKUs: Número de Style Numbers diferentes"
+            span(
+              span("SKUs", style = "font-weight:bold; font-family: 'Helvetica', sans-serif; font-size:16px;"),
+              span(bsicons::bs_icon("info-circle", width = "14px"))
+            ),
+            "Número de Style Numbers diferentes"
           )
         ),
         card_body(
@@ -23,8 +32,11 @@ mod_visao_geral_ui <- function(id) {
         style = "border: 1px solid #1EAD74;",
         card_header(
           bslib::tooltip(
-            span("Verba  ", bsicons::bs_icon("info-circle")),
-            "Verba: ..."
+            span(
+              span("Verba", style = "font-weight:bold; font-family: 'Helvetica', sans-serif; font-size:16px;"),
+              span(bsicons::bs_icon("info-circle", width = "14px"))
+            ),
+            "Quantidade X Preço de Venda"
           )
         ),
         card_body(
@@ -36,8 +48,11 @@ mod_visao_geral_ui <- function(id) {
         style = "border: 1px solid #C1121F;",
         card_header(
           bslib::tooltip(
-            span("Custo  ", bsicons::bs_icon("info-circle")),
-            "Custo: ..."
+            span(
+              span("Custo", style = "font-weight:bold; font-family: 'Helvetica', sans-serif; font-size:16px;"),
+              span(bsicons::bs_icon("info-circle", width = "14px"))
+            ),
+            "Quantidade X Custo Unitário"
           )
         ),
         card_body(
@@ -49,8 +64,11 @@ mod_visao_geral_ui <- function(id) {
         style = "border: 1px solid #F18F01;",
         card_header(
           bslib::tooltip(
-            span("Markup  ", bsicons::bs_icon("info-circle")),
-            "Markup: Verba / Custo"
+            span(
+              span("Markup", style = "font-weight:bold; font-family: 'Helvetica', sans-serif; font-size:16px;"),
+              span(bsicons::bs_icon("info-circle", width = "14px"))
+            ),
+            "Verba / Custo"
           )
         ),
         card_body(

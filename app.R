@@ -1,5 +1,6 @@
 
 # app.R ---------------------------------------------------------------
+#rsconnect::writeManifest()
 library(shiny)
 library(bslib)
 library(bsicons)
