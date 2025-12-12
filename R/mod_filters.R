@@ -3,7 +3,8 @@ mod_filters_ui <- function(id) {
   ns <- NS(id)
 
   tagList(
-    h4("Filtros"),
+    div(class = "farm-sidebar-title", "Filtros"),
+    # h4("Filtros"),
     # div(
     #   class = "mb-3",
     #   span(

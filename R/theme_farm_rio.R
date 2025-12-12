@@ -50,6 +50,13 @@ farm_css <- function() {
     box-shadow: 4px 0 18px rgba(0,0,0,0.06);
   }
   
+  .farm-sidebar-title {
+    color: #8B2C1F;
+
+    font-weight: 600;
+    font-size: 1.8rem;
+  }
+  
   .bslib-sidebar-layout .sidebar .sidebar-content {
     padding-top: 0px !important;
   }
@@ -157,5 +164,23 @@ farm_css <- function() {
     color: #351E1C;
     margin-bottom: 0.25rem;
   }
+  
+    /* Impede que o pickerInput ultrapasse o container */
+  .bootstrap-select {
+    max-width: 100% !important;
+  }
+
+  /* Permite quebra de linha no texto exibido quando o picker está FECHADO */
+  .bootstrap-select .filter-option-inner-inner {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+  }
+
+  /* Permite quebra de linha nos itens do dropdown (picker ABERTO) */
+  .bootstrap-select .dropdown-menu.inner li a span.text {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+  }
+  
   "))
 }
